@@ -8,8 +8,9 @@ from openpyxl.worksheet.worksheet import Worksheet as ws
 from openpyxl.writer.excel import save_workbook
 from openpyxl.workbook import Workbook as WB
 import os
+from configparser import SafeConfigParser
 
-FILE = os.environ.get("DATABASE")
+FILE = os.environ.get("FILE")
 wb = load_workbook(FILE)
 c = wb["Guild Gear Sheet"]
 
@@ -163,41 +164,37 @@ def get_val(userid, item:str):
     piece = c[f'{idx}{row}'].value
     return piece
 
-def get_char(userid):
-    """
-    Gets the character info of a user given their id
-    """
-    try:
-        row = 0
-        idx = ''
-        
-        colval = ['FN', 'CLASS', 'AP', 'AAP', 'DP', 'GS']
-        colidx = ['B', 'C', 'D', 'E', 'F', 'G']
-        col = zip(colval, colidx)
+def get_rank():
+    colval = ['FN', 'CLASS', 'AP', 'AAP', 'DP', 'GS']
+    colidx = ['B', 'C', 'D', 'E', 'F', 'G']
+    col = zip(colval, colidx)
 
-        VALUES = []
+    row = 0
+    idx = ''
 
-        ctrl = False
+    scores = []
+    FNs = []
 
-        while ctrl == False:
-            for cell in c['A']:
-                if cell.value == None:
-                    pass
+    while True:
+        for cell in c['G']:
+            if cell.value == None:
+                pass
+            elif cell.row == 1:
+                pass
+            else:
+                scores.append(cell.value)
+        for cell in c['B']:
+            if cell.value == None:
+                pass
+            elif cell.row == 1:
+                pass
+            else:
+                FNs.append(cell.value)
+        break
 
-                elif str(cell.value) == f'{userid}':
-                    row = cell.row
-                    ctrl = True
-                else:
-                    ctrl = False
-        for cell in c[f'A{row}']:
-            VALUES.append(cell.value)
-            print("Values gathered successfully")
+    ranks = sorted(zip(scores, FNs), key=lambda i: i[1], reverse=False)
 
-        return VALUES
-
-    except:
-        import traceback
-        traceback.print_exc()
+    return ranks
 
 def calcGS(userid):
     """

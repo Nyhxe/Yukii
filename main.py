@@ -5,6 +5,10 @@ from discord.ext import commands
 import sys, traceback
 import keep_alive
 import os
+import replit
+import dotenv
+
+palce = dotenv.find_dotenv('.env')
 
 keep_alive.keep_alive()
 
@@ -52,4 +56,4 @@ async def mtncmde(ctx):
     else:
         return False
 
-bot.run(os.environ.get('TOKEN'), bot=True, reconnect=True)
+bot.run(os.environ.get("TOKEN"), bot=True, reconnect=True)
