@@ -231,6 +231,29 @@ class Black_Desert(commands.Cog, name= "Black Desert"):
         for user in list(ctx.message.mentions):
             await ctx.send(f'{ctx.message.author.id} -- Author ID \n {user.id} -- Mention ID')
 
+    #-----Sets up PvP Matches-----#
+    @commands.command(name = 'match',
+                      description = '',
+                      brief = '',
+                      aliases = '')
+    @commands.has_any_role("Shadows", "Followers of the Duchess", "EU Members")
+    async def pvp_matching(self, ctx):
+        ranks = gf.get_rank()
+        user = ctx.message.author
+        
+        usergear = gf.get_val(user.id, "GS")
+        emb = discord.Embed(title = f"Possible matchups for {user.display_name}")
+
+        for score, fn in ranks:
+            difference = abs(usergear - score)
+            if difference > 50:
+                pass
+            elif difference <= 50:
+                emb.add_field(name = fn, value = f"Gearscore: {score} \nGearscore difference: {difference}")
+
+        await ctx.send(embed = emb)
+
+
 
 def setup(bot):
     bot.add_cog(Black_Desert(bot))
