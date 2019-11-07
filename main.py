@@ -5,6 +5,10 @@ from discord.ext import commands
 import sys, traceback
 import keep_alive
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+TOKEN = os.getenv("TOKEN")
 
 keep_alive.keep_alive()
 
@@ -168,4 +172,4 @@ class Log():
 
             await chnl.send(embed = emb)
 
-bot.run(os.environ.get("TOKEN"), bot=True, reconnect=True)
+bot.run(TOKEN, bot=True, reconnect=True)

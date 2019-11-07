@@ -9,8 +9,10 @@ from openpyxl.writer.excel import save_workbook
 from openpyxl.workbook import Workbook as WB
 import os
 from configparser import SafeConfigParser
+from dotenv import load_dotenv
 
-FILE = os.environ.get("FILE")
+load_dotenv()
+FILE = os.getenv("FILE")
 wb = load_workbook(FILE)
 c = wb["Guild Gear Sheet"]
 
