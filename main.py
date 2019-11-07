@@ -5,10 +5,6 @@ from discord.ext import commands
 import sys, traceback
 import keep_alive
 import os
-import replit
-import dotenv
-
-palce = dotenv.find_dotenv('.env')
 
 keep_alive.keep_alive()
 
