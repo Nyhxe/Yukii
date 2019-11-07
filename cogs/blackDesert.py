@@ -235,7 +235,7 @@ class Black_Desert(commands.Cog, name= "Black Desert"):
     @commands.command(name = 'match',
                       description = '',
                       brief = '',
-                      aliases = '')
+                      aliases = [])
     @commands.has_any_role("Shadows", "Followers of the Duchess", "EU Members")
     async def pvp_matching(self, ctx):
         ranks = gf.get_rank()
