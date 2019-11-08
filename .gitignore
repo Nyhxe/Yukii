@@ -335,3 +335,4 @@ ASALocalRun/
 # Repl.it specific hosting files
 .lock
 .toml
+*.env

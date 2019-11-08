@@ -7,10 +7,10 @@ import keep_alive
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.getenv("TOKEN")
+load_dotenv('vars.env')
+TOKEN = os.getenv('TOKEN')
 
-keep_alive.keep_alive()
+#keep_alive.keep_alive()
 
 startup_extensions = ["cogs.general", "cogs.moderation", "cogs.blackDesert"]
 
