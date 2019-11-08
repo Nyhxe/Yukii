@@ -130,7 +130,7 @@ class General(commands.Cog):
             "Hey baby, are you a stone cutter? Cuz you're really fucking useless",
             "Ayy, baby, are you a fire alarm? 'Cause you're really fucking loud and annoying",
             "Incest is a wincest",
-            "I've got about a 10% chance of working correctly 20% of the time \nThe other 80% of the time? Go fuck yourself",
+            "I've got about a 10% chance of working correctly 20% of the time \nThe other 80% of the time?... Go fuck yourself",
             "I swear to God, if you ask me to do something **one more time**!; I will fill you with milk!!",
             "I'm harder than a nonce in a nursery",
             "I'm harder than a paedophile in a preschool",
@@ -140,7 +140,21 @@ class General(commands.Cog):
             "Vsauce is short for vagina sauce",
             "Corn rock",
             "Is it racist to say 'Let's role' to a person in a wheelchair?",
-            "You think dogs will ever fuck 'human style'?"
+            "You think dogs will ever fuck 'human style'?",
+            "Can't get Don Cheadle out of the oven full of orphans.",
+            "Snorting a line a day, keeps the doctor away. The police on the other hand... maybe not.",
+            "Don't you just hate it when your house floats away?",
+            "No. Fuck you.",
+            "I'm *basically* a profressional",
+            "OK Boomer",
+            "Isn't it crazy how human ears evolved to fit earbuds?",
+            "Manities are like swimming footballs",
+            "UGH! I'm so **mad**; I'm goin' grocery shopping!!",
+            "Ya like *Snickeeerrrsss*?",
+            "Why say lot word when few word do trick?",
+            "'If you had just made it into the door, you would have made it into the door... \n"+
+            "and what would've been wild.'\n"+
+            "~Th3Jez 2019"
     ]
         await ctx.send(random.choice(possible_motd))    
 
@@ -270,6 +284,40 @@ class General(commands.Cog):
         await ctx.send(embed=help_embed)
    
         return
+
+    #-----Rate User-----#
+    @commands.command(name = 'rate', 
+                      description = 'Rates a user out of 10 given a nickname or user mention',
+                      brief = 'Rate a user',
+                      alias = [])
+    async def rate_user(self, ctx, *,user):
+        guild = ctx.message.guild
+        possible_ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+        if user != None and len(ctx.message.mentions) != 0:
+            for user in ctx.message.mentions:
+                rating = random.choice(possible_ratings)
+                await ctx.send(f"I'd say {user.display_name} is a {rating}/10")
+
+        elif user != None:
+            rating = random.choice(possible_ratings)
+            members = self.bot.get_all_members()
+            ratee = None
+            for member in list(members):
+                if user in member.display_name:
+                    ratee = member
+                else:
+                    pass
+
+            if ratee == guild.get_member(277759911998521346) or ratee == guild.get_member(591611139117416468):
+                await ctx.send(f"Oh, {ratee.display_name} is a 1,000,000,000,000/10 without a doubt")
+            else:
+                await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
+
+        else:
+            ratee = ctx.message.author
+            rating = random.choice(possible_ratings)
+            await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
         
 def setup(bot):
     bot.add_cog(General(bot))

@@ -225,11 +225,6 @@ class Black_Desert(commands.Cog, name= "Black Desert"):
         embed.set_footer(text = f"Guild ranking requested by {user.display_name}", icon_url = user.avatar_url)
 
         await ctx.send(embed=embed)
-            
-    @commands.command(hidden = True)
-    async def test(self, ctx):
-        for user in list(ctx.message.mentions):
-            await ctx.send(f'{ctx.message.author.id} -- Author ID \n {user.id} -- Mention ID')
 
     #-----Sets up PvP Matches-----#
     @commands.command(name = 'match',
