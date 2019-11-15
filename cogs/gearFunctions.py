@@ -9,7 +9,7 @@ from openpyxl.writer.excel import save_workbook
 from openpyxl.workbook import Workbook as WB
 import os
 from configparser import SafeConfigParser
-from dotenv import load_dotenv
+from dotenv_config import load_dotenv
 
 load_dotenv()
 FILE = os.getenv("FILE")

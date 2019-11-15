@@ -3,13 +3,12 @@
 import discord
 from discord.ext import commands
 import sys, traceback
-import keep_alive
+#import keep_alive
 import os
-from dotenv import load_dotenv
+from dotenv_config import load_dotenv
 
 load_dotenv('vars.env')
 TOKEN = os.getenv('TOKEN')
-
 #keep_alive.keep_alive()
 
 startup_extensions = ["cogs.general", "cogs.moderation", "cogs.blackDesert"]
