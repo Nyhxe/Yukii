@@ -154,7 +154,10 @@ class General(commands.Cog):
             "Why say lot word when few word do trick?",
             "'If you had just made it into the door, you would have made it into the door... \n"+
             "and what would've been wild.'\n"+
-            "~Th3Jez 2019"
+            "~Th3Jez 2019",
+            "Poor some gas and light my ass",
+            "This is the height my life and I've just spent 13 minutes watching a girl cover herself in peanut butter",
+            "Sucks to suck"
     ]
         await ctx.send(random.choice(possible_motd))    
 
@@ -285,39 +288,71 @@ class General(commands.Cog):
    
         return
 
-    #-----Rate User-----#
-    @commands.command(name = 'rate', 
-                      description = 'Rates a user out of 10 given a nickname or user mention',
-                      brief = 'Rate a user',
-                      alias = [])
-    async def rate_user(self, ctx, *,user):
-        guild = ctx.message.guild
-        possible_ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    ##-----Rate User-----#
+    #@commands.command(name = 'rate', 
+    #                  description = 'Rates a user out of 10 given a nickname or user mention',
+    #                  brief = 'Rate a user',
+    #                  alias = [])
+    #async def rate_user(self, ctx, *,user):
+    #    guild = ctx.message.guild
+    #    possible_ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
-        if user != None and len(ctx.message.mentions) != 0:
-            for user in ctx.message.mentions:
-                rating = random.choice(possible_ratings)
-                await ctx.send(f"I'd say {user.display_name} is a {rating}/10")
+    #    if user != None and len(ctx.message.mentions) != 0:
+    #        for user in ctx.message.mentions:
+    #            rating = random.choice(possible_ratings)
+    #            await ctx.send(f"I'd say {user.display_name} is a {rating}/10")
 
-        elif user != None:
-            rating = random.choice(possible_ratings)
-            members = self.bot.get_all_members()
-            ratee = None
-            for member in list(members):
-                if user in member.display_name:
-                    ratee = member
-                else:
-                    pass
+    #    elif user != None:
+    #        rating = random.choice(possible_ratings)
+    #        members = self.bot.get_all_members()
+    #        ratee = None
+    #        for member in list(members):
+    #            if user in member.display_name:
+    #                ratee = member
+    #            else:
+    #                pass
 
-            if ratee == guild.get_member(277759911998521346) or ratee == guild.get_member(591611139117416468):
-                await ctx.send(f"Oh, {ratee.display_name} is a 1,000,000,000,000/10 without a doubt")
-            else:
-                await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
+    #        if ratee == guild.get_member(277759911998521346) or ratee == guild.get_member(591611139117416468):
+    #            await ctx.send(f"Oh, {ratee.display_name} is a 1,000,000,000,000/10 without a doubt")
+    #        else:
+    #            await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
 
-        else:
+    #    elif user == "me":
+    #        ratee = ctx.message.author
+    #        rating = random.choice(possible_ratings)
+    #        await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
+
+    #-----Rate something-----#
+    @commands.group()
+    async def rate(self, ctx):
+        if ctx.invoked_subcommand is None:
             ratee = ctx.message.author
             rating = random.choice(possible_ratings)
             await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
+
+    @rate.command()
+    async def rate_user(self, ctx, user: str):
+        rating = random.choice(possible_ratings)
+        members = self.bot.get_all_members()
+        ratee = None
+        for member in list(members):
+            if user in member.display_name:
+                ratee = member
+            else:
+                pass
+
+        if ratee == guild.get_member(277759911998521346) or ratee == guild.get_member(591611139117416468):
+            await ctx.send(f"Oh, {ratee.display_name} is a 1,000,000,000,000/10 without a doubt")
+        else:
+            await ctx.send(f"I'd say {ratee.display_name} is a {rating}/10")
+
+    @rate.command()
+    async def rate_user_mention(self, ctx, user):
+        for user in ctx.message.mentions:
+            rating = random.choice(possible_ratings)
+            await ctx.send(f"I'd say {user.display_name} is a {rating}/10")
+
+    #-----Send link to GitHub repo-----#
         
 def setup(bot):
     bot.add_cog(General(bot))
